@@ -1,0 +1,45 @@
+% Example text based on https://github.com/streamjoin/nusthesis
+\documentclass[12pt]{nuscegthesis}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}  % better table formatting
+\usepackage{graphicx}  % include images
+\usepackage{lipsum}  % for dummy text
+
+\begin{document}
+
+\title{We Are What We Eat: The Recipe of Success}
+\author{CHICKEN Rice}
+\degree{Bachelor of Engineering (Computer Engineering)}
+\department{Electrical and Computer Engineering}
+\academicyear{2018/2019}
+\projectid{Hxxxxxx}
+\supervisor{Prof CHAR Kway Teow}
+\deliverables{Report: 1 Volume}
+\deliverablestwo{Program: 1 Thumbdrive}
+%\deliverablesthree{Database: 1 Thumbdrive}
+
+% Makes title (cover) page
+\maketitle
+
+% Makes secondary title page
+\secondarytitlepage
+
+\renewcommand\arraystretch{1.5}  % stretch table rows
+
+% Roman numeral page numbering
+\begin{frontmatter}
+  \input{abstract.tex}
+  \input{acknowledgments.tex}
+  \tableofcontents
+  \listoftables
+  \listoffigures
+\end{frontmatter}
+
+\input{chapters/intro.tex}
+\input{chapters/noodle.tex}
+\input{chapters/rice.tex}
+\input{chapters/concl.tex}
+
+\printbibliography[title={References},heading=bibintoc]
+
+\end{document}
