@@ -16,7 +16,6 @@
 \ProcessOptions\relax
 \LoadClass{report}
 
-
 %    ****************************************
 %    *               PACKAGES               *
 %    ****************************************
@@ -25,9 +24,12 @@
 \RequirePackage{setspace}  % easy switching between single/double spacing
 \RequirePackage{titlesec}  % format titles
 \RequirePackage{parskip}  % remove indentation at start of paragraphs
+\RequirePackage{tabularx,ragged2e}  % table formatting
 \RequirePackage[sorting=none]{biblatex}  % number citations in order of appearance
 \addbibresource{references.bib}
 \RequirePackage{tocbibind}  % automatically include list of figures/tables in toc
+\RequirePackage[final]{listings}  % code formatting
+\RequirePackage{subcaption} % subfigures
 \RequirePackage{hyperref}  % import hyperref last
 
 
@@ -50,13 +52,28 @@
   {0em}
   {-50pt}
   {2.5ex}
+  
+% Column type for tabularx with line breaks in-cell
+\newcolumntype{C}{>{\Centering\arraybackslash}X} % centered "X" column
+\newcolumntype{L}{>{\Left\arraybackslash}X} % left-aligned "X" column
+  
+% Change font for lstlisting code
+\lstset{basicstyle=\ttfamily,breaklines=true}
 
+% JavaScript code formatting with lstlisting
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, this, throw, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  sensitive=true
+}
 
 %    ****************************************
 %    *             USER MACROS              *
 %    ****************************************
 \newcommand{\code}[1]{\texttt{#1}}  % print text as code
-
 
 %    ****************************************
 %    *             FRONT MATTER             *
@@ -93,7 +110,7 @@
 
 % Temporarily change margins to centre text
 \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
-\let\endchangemargin=\endlist
+\let\endchangemargin=\endlist 
 
 % Set the block letters that will be used in the cover and title pages
 \def\blocklt#1{\textbf{\MakeUppercase{#1}}}
@@ -125,7 +142,7 @@
 % (SECONDARY) TITLE PAGE
 \newcommand\secondarytitlepage{
     \thispagestyle{empty}
-    \begin{changemargin}{-1cm}{0cm}
+    \begin{changemargin}{-1cm}{0cm} 
     \begin{center}
         B.Eng Dissertation\par
         \vspace{8em}
@@ -156,8 +173,10 @@
     \pagebreak
 }
 
-%    ************  ENVIRONMENTS ************
+%    ************  ENVIRONMENTS ************ 
 % ABSTRACT
+\renewcommand\abstractname{ABSTRACT}
+
 \def\abstract{
   \phantomsection\addcontentsline{toc}{chapter}{\abstractname}
   \begin{center}{
@@ -170,7 +189,7 @@
 
 
 % ACKNOWLEDGMENTS
-\newcommand\acknowledgename{Acknowledgments}
+\newcommand\acknowledgename{ACKNOWLEDGMENTS}
 
 \def\acknowledgments{
   \phantomsection\addcontentsline{toc}{chapter}{\acknowledgename}
@@ -193,6 +212,40 @@
     {\setcounter{page}{1}\renewcommand{\thepage}{\roman{page}}}
     {\newpage\renewcommand{\thepage}{\arabic{page}}\setcounter{page}{1}}
 
+%    ************  TABLE OF CONTENTS ************ 
+% Capitalize some frontmatter
+\renewcommand{\listtablename}{LIST OF TABLES}
+\renewcommand{\listfigurename}{LIST OF FIGURES}
+
+% Capitalize and italicize chapter titles. Prefix chapter number with 'CHAPTER'
+\makeatletter
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{plain}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                       \if@mainmatter
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{chapter}%
+                         {\protect CHAPTER \numberline{\thechapter}\texorpdfstring{\textit{\MakeUppercase{#1}}}{#1}}%
+                       \else
+                       \addcontentsline{toc}{chapter}{\texorpdfstring{\textit{\MakeUppercase{#1}}}{#1}}%
+                       \fi
+                    \else
+                    \addcontentsline{toc}{chapter}{\texorpdfstring{\textit{\MakeUppercase{#1}}}{#1}}%
+                    \fi
+                    \chaptermark{#1}%
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi}
+\makeatother
 
 % Redefinition of ToC command to get single spacing
 \makeatletter
