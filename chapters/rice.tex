@@ -1,35 +1,35 @@
 \chapter{Like White on Rice}
 \label{ch:rice}
 
-\lipsum[1-3]
+\lipsum[1-2]
+\autoref{tab:table} shows an example table.
+
+% From https://tex.stackexchange.com/questions/238503/tip-on-how-to-make-a-visually-good-table
+% Also handles text overflow
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{0.9\textwidth}{L C C C}  % left-align 1st column, centre-align others. See cls file for definitions of L and C
+        \toprule
+        & \multicolumn{3}{c}{methods tested} \\
+        \cmidrule(lr){2-4}
+        Method & Heat wheel & Exhaust air & Outdoor air \\
+        \midrule
+        First method          &         &    Y    &        \\
+        Amazingly done        &         &         &    Y    \\
+        Superficial pass      &         &    Y    &    Y    \\
+        Chemical bath         &    Y    &         &        \\
+        Yang et al.           &    Y    &    Y    &        \\
+        Brown                 &    Y    &         &    Y    \\
+        Industry standard     &    Y    &    Y    &    Y    \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Example of a table}
+    \label{tab:table}
+\end{table}
 
 \section{Preliminaries}
 
 \lipsum[5]
-\autoref{tab:booktab} shows a table made with the help of the \code{booktabs} package.
-
-% From https://tex.stackexchange.com/questions/238503/tip-on-how-to-make-a-visually-good-table
-\begin{table}[htbp]
-    \centering
-    \begin{tabular}{*4c}
-        \toprule
-        & \multicolumn{3}{c}{methods tested} \\
-        \cmidrule(lr){2-4}
-        Case & Heat  & Exhaust & Outdoor \\    
-        \#   & Wheel & Air     & Air     \\
-        \midrule
-        1 &        &    Y    &        \\
-        2 &        &        &    Y    \\
-        3 &        &    Y    &    Y    \\
-        4 &    Y    &        &        \\
-        5 &    Y    &    Y    &        \\
-        6 &    Y    &        &    Y    \\
-        7 &    Y    &    Y    &    Y    \\
-        \bottomrule
-    \end{tabular}
-    \caption{MWE of a table using booktabs}
-    \label{tab:booktab}
-\end{table}
 
 \section{Methodology}
 

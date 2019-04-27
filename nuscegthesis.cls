@@ -52,11 +52,11 @@
   {0em}
   {-50pt}
   {2.5ex}
-  
+
 % Column type for tabularx with line breaks in-cell
 \newcolumntype{C}{>{\Centering\arraybackslash}X} % centered "X" column
 \newcolumntype{L}{>{\Left\arraybackslash}X} % left-aligned "X" column
-  
+
 % Change font for lstlisting code
 \lstset{basicstyle=\ttfamily,breaklines=true}
 
@@ -110,7 +110,7 @@
 
 % Temporarily change margins to centre text
 \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
-\let\endchangemargin=\endlist 
+\let\endchangemargin=\endlist
 
 % Set the block letters that will be used in the cover and title pages
 \def\blocklt#1{\textbf{\MakeUppercase{#1}}}
@@ -142,7 +142,7 @@
 % (SECONDARY) TITLE PAGE
 \newcommand\secondarytitlepage{
     \thispagestyle{empty}
-    \begin{changemargin}{-1cm}{0cm} 
+    \begin{changemargin}{-1cm}{0cm}
     \begin{center}
         B.Eng Dissertation\par
         \vspace{8em}
@@ -173,7 +173,7 @@
     \pagebreak
 }
 
-%    ************  ENVIRONMENTS ************ 
+%    ************  ENVIRONMENTS ************
 % ABSTRACT
 \renewcommand\abstractname{ABSTRACT}
 
@@ -212,7 +212,7 @@
     {\setcounter{page}{1}\renewcommand{\thepage}{\roman{page}}}
     {\newpage\renewcommand{\thepage}{\arabic{page}}\setcounter{page}{1}}
 
-%    ************  TABLE OF CONTENTS ************ 
+%    ************  TABLE OF CONTENTS ************
 % Capitalize some frontmatter
 \renewcommand{\listtablename}{LIST OF TABLES}
 \renewcommand{\listfigurename}{LIST OF FIGURES}
