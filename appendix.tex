@@ -1,0 +1,22 @@
+% No auto-refs to and from here
+\chapter*{APPENDIX A}
+\begin{center}
+    {\normalfont\Large\bfseries CODE SAMPLES}
+\end{center}
+\addcontentsline{toc}{chapter}{APPENDIX A \textit{CODE SAMPLES}}  % manually italicise title for table of contents
+
+\section*{Rice code}
+\begin{singlespace}
+\begin{lstlisting}[language=Python]
+try:
+    rice = Rice()
+    # Process rice
+    rice.harvest()
+    rice.dehusk(3)
+except Exception as e:
+    # Log to file and stdout on screen
+    logger.error('{}'.format(e))
+finally:
+    rice.close()
+\end{lstlisting}
+\end{singlespace}
